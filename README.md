@@ -36,13 +36,19 @@
         .slider-item {
             min-width: 100%;
             flex-shrink: 0;
-            height: 520px;
+            height: 520px; /* PC向けに高さを維持 */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 1rem;
             overflow: hidden;
             position: relative;
+        }
+        /* スマホ向けにスライダーの高さを調整 */
+        @media (max-width: 640px) { /* Tailwind's sm breakpoint */
+            .slider-item {
+                height: 250px; /* スマホでは高さを低く */
+            }
         }
         .slider-item img {
             width: 100%;
@@ -56,12 +62,18 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 2.5rem;
+            font-size: 2.5rem; /* PC向け */
             font-weight: 800;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             font-family: 'Hachi Maru Pop', cursive;
             text-align: center;
             z-index: 2;
+        }
+        /* スマホ向けにスライダーテキストのフォントサイズ調整 */
+        @media (max-width: 640px) {
+            .slider-item-text {
+                font-size: 1.5rem; /* スマホではフォントサイズを小さく */
+            }
         }
         /* スライダークリッカー */
         .slider-nav-button {
@@ -84,6 +96,15 @@
         }
         .slider-nav-button.left { left: 1.5rem; }
         .slider-nav-button.right { right: 1.5rem; }
+        /* スマホ向けにボタンのパディング調整 */
+        @media (max-width: 640px) {
+            .slider-nav-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
+            }
+            .slider-nav-button.left { left: 0.5rem; }
+            .slider-nav-button.right { right: 0.5rem; }
+        }
         /* スライダードット */
         .slider-dots {
             position: absolute;
@@ -94,18 +115,19 @@
             gap: 0.75rem;
             z-index: 10;
         }
-        .slider-dot {
-            width: 14px;
-            height: 14px;
-            background-color: rgba(255, 255, 255, 0.6);
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .slider-dot.active {
-            background-color: white;
-            transform: scale(1.3);
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+        /* スマホ向けにドットのサイズ調整 */
+        @media (max-width: 640px) {
+            .slider-dots {
+                bottom: 0.75rem;
+                gap: 0.5rem;
+            }
+            .slider-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .slider-dot.active {
+                transform: scale(1.2);
+            }
         }
 
         /* カレンダー専用スタイル */
@@ -142,7 +164,7 @@
             border-top: 1px solid #edf2f7; /* Tailwind's gray-100 */
         }
         .calendar-day {
-            min-height: 100px; /* Adjust as needed */
+            min-height: 100px; /* PC向け */
             border: 1px solid #edf2f7; /* Tailwind's gray-100 */
             padding: 0.5rem;
             position: relative;
@@ -150,6 +172,16 @@
             flex-direction: column;
             align-items: flex-start;
             overflow: hidden;
+        }
+        /* スマホ向けにカレンダーセルの高さを調整 */
+        @media (max-width: 640px) {
+            .calendar-day {
+                min-height: 80px; /* スマホでは高さを低く */
+                padding: 0.25rem;
+            }
+            .day-number {
+                font-size: 1rem;
+            }
         }
         .calendar-day.empty {
             background-color: #f7fafc; /* Tailwind's gray-50 */
@@ -201,7 +233,7 @@
         }
         .modal-content {
             background-color: white;
-            padding: 2rem;
+            padding: 2rem; /* PC向け */
             border-radius: 1rem;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             max-width: 90%;
@@ -210,6 +242,30 @@
             position: relative;
             transform: translateY(20px);
             transition: transform 0.3s ease;
+        }
+        /* スマホ向けにモーダルのパディングとフォントサイズを調整 */
+        @media (max-width: 640px) {
+            .modal-content {
+                padding: 1rem;
+                max-width: 95%; /* スマホでは幅を少し広げる */
+            }
+            .modal-title {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            .modal-subtitle {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            .modal-detail-item {
+                font-size: 0.875rem; /* text-sm */
+                margin-bottom: 0.25rem;
+            }
+            .modal-close-button {
+                font-size: 1.2rem;
+                top: 0.5rem;
+                right: 0.5rem;
+            }
         }
         .modal-overlay.show .modal-content {
             transform: translateY(0);
@@ -309,28 +365,28 @@
 
         <!-- メインタイトル -->
         <section class="w-full max-w-6xl text-center mb-8">
-            <h2 class="text-6xl font-extrabold text-custom-orange mb-8 tracking-tight">Chiba Event Calendar</h2>
+            <h2 class="text-4xl sm:text-6xl font-extrabold text-custom-orange mb-8 tracking-tight">Chiba Event Calendar</h2>
             <div class="w-full flex justify-center items-center my-8">
                 <hr class="border-t-4 border-green-500 w-1/5 sm:w-1/6 rounded-full mx-4 opacity-75">
-                <p class="text-4xl font-bold text-custom-orange whitespace-nowrap drop-shadow-md">千葉のイベント情報カレンダー</p>
+                <p class="text-2xl sm:text-4xl font-bold text-custom-orange whitespace-nowrap drop-shadow-md">千葉のイベント情報カレンダー</p>
                 <hr class="border-t-4 border-green-500 w-1/5 sm:w-1/6 rounded-full mx-4 opacity-75">
             </div>
         </section>
 
         <!-- カレンダーセクション（スプレッドシート連携） -->
-        <section class="w-full max-w-6xl p-8 sm:p-10 mb-12">
-            <h3 class="text-3xl font-bold text-custom-orange mb-8 text-center">カレンダー（スプレッドシートから読み込み）</h3>
-            <div class="bg-custom-orange bg-opacity-10 p-8 rounded-xl border border-custom-orange border-opacity-40">
-                <p class="text-xl text-gray-700 text-center mb-6 leading-relaxed">
+        <section class="w-full max-w-6xl p-4 sm:p-8 mb-12">
+            <h3 class="text-2xl sm:text-3xl font-bold text-custom-orange mb-8 text-center">カレンダー（スプレッドシートから読み込み）</h3>
+            <div class="bg-custom-orange bg-opacity-10 p-4 sm:p-8 rounded-xl border border-custom-orange border-opacity-40">
+                <p class="text-base sm:text-xl text-gray-700 text-center mb-6 leading-relaxed">
                     ここにスプレッドシートから読み込んだイベントを卓上カレンダー形式で表示します。
                 </p>
                 <!-- カレンダーナビゲーション -->
                 <div class="flex justify-between items-center mb-4">
-                    <button id="prevMonth" class="bg-custom-orange hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-custom-orange focus:ring-opacity-50">
+                    <button id="prevMonth" class="bg-custom-orange hover:bg-opacity-90 text-white font-bold py-2 px-3 sm:px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-custom-orange focus:ring-opacity-50 text-sm sm:text-base">
                         &lt; 前の月
                     </button>
-                    <h4 id="currentMonthYear" class="text-2xl font-bold text-custom-orange"></h4>
-                    <button id="nextMonth" class="bg-custom-orange hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-custom-orange focus:ring-opacity-50">
+                    <h4 id="currentMonthYear" class="text-xl sm:text-2xl font-bold text-custom-orange"></h4>
+                    <button id="nextMonth" class="bg-custom-orange hover:bg-opacity-90 text-white font-bold py-2 px-3 sm:px-4 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-custom-orange focus:ring-opacity-50 text-sm sm:text-base">
                         次の月 &gt;
                     </button>
                 </div>
@@ -342,9 +398,9 @@
         </section>
 
         <!-- サイト紹介 -->
-        <section class="w-full max-w-6xl p-8 sm:p-10 mb-12">
-            <h3 class="text-4xl font-bold text-custom-orange mb-6 text-center">私たちのサイトについて</h3>
-            <p class="text-xl leading-relaxed text-custom-orange text-center font-medium">
+        <section class="w-full max-w-6xl p-4 sm:p-8 mb-12">
+            <h3 class="text-2xl sm:text-4xl font-bold text-custom-orange mb-6 text-center">私たちのサイトについて</h3>
+            <p class="text-base sm:text-xl leading-relaxed text-custom-orange text-center font-medium">
                 ちばイベントカレンダーは、<br>
                 千葉の様々なイベントがすぐでわかります。<br>
                 ぜひ行きたいイベントを見つけてください。
@@ -352,30 +408,31 @@
         </section>
 
         <!-- おすすめイベント・スポット -->
-        <section class="w-full max-w-6xl p-8 sm:p-10 mb-12">
-            <h3 class="text-3xl font-bold text-indigo-700 mb-8 text-center">おすすめイベント・スポット</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section class="w-full max-w-6xl p-4 sm:p-8 mb-12">
+            <h3 class="text-2xl sm:text-3xl font-bold text-indigo-700 mb-8 text-center">おすすめイベント・スポット</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
                 <!-- カード1 -->
                 <a href="https://example.com/link1" target="_blank" class="block rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out border-2 border-transparent hover:border-indigo-400">
-                    <img src="https://placehold.co/400x250/FF6600/FFFFFF?text=千葉の観光スポット" alt="外部リンク画像1" class="w-full h-56 object-cover">
-                    <div class="p-5 bg-gray-50 text-center">
-                        <p class="text-xl font-semibold text-gray-800 mb-1">千葉の観光スポット</p>
-                        <p class="text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
+                    <img src="https://placehold.co/400x250/FF6600/FFFFFF?text=千葉の観光スポット" alt="外部リンク画像1" class="w-full h-40 sm:h-56 object-cover">
+                    <div class="p-3 sm:p-5 bg-gray-50 text-center">
+                        <p class="text-lg sm:text-xl font-semibold text-gray-800 mb-1">千葉の観光スポット</p>
+                        <p class="text-sm sm:text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
                     </div>
                 </a>
                 <!-- カード2 -->
                 <a href="https://example.com/link2" target="_blank" class="block rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out border-2 border-transparent hover:border-indigo-400">
-                    <img src="https://placehold.co/400x250/FF9933/FFFFFF?text=地元のグルメフェス" alt="外部リンク画像2" class="w-full h-56 object-cover">
-                    <div class="p-5 bg-gray-50 text-center">
-                        <p class="text-xl font-semibold text-gray-800 mb-1">地元のグルメフェス</p>
-                        <p class="text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
+                    <img src="https://placehold.co/400x250/FF9933/FFFFFF?text=地元のグルメフェス" alt="外部リンク画像2" class="w-full h-40 sm:h-56 object-cover">
+                    <div class="p-3 sm:p-5 bg-gray-50 text-center">
+                        <p class="text-lg sm:text-xl font-semibold text-gray-800 mb-1">地元のグルメフェス</p>
+                        <p class="text-sm sm:text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
                     </div>
                 </a>
                 <!-- カード3 -->
                 <a href="https://example.com/link3" target="_blank" class="block rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out border-2 border-transparent hover:border-indigo-400">
-                    <img src="https://placehold.co/400x250/FFCC66/FFFFFF?text=アートイベント情報" alt="外部リンク画像3" class="w-full h-56 object-cover">
-                    <div class="p-5 bg-gray-50 text-center">
-                        <p class="text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
+                    <img src="https://placehold.co/400x250/FFCC66/FFFFFF?text=アートイベント情報" alt="外部リンク画像3" class="w-full h-40 sm:h-56 object-cover">
+                    <div class="p-3 sm:p-5 bg-gray-50 text-center">
+                        <p class="text-lg sm:text-xl font-semibold text-gray-800 mb-1">アートイベント情報</p>
+                        <p class="text-sm sm:text-base text-indigo-600 font-medium hover:underline">詳細はこちら &rarr;</p>
                     </div>
                 </a>
             </div>
@@ -473,7 +530,7 @@
             const eventCalendarDiv = document.getElementById('event-calendar');
             eventCalendarDiv.innerHTML = '<p class="text-gray-500 text-center text-2xl font-medium">イベントデータを読み込み中...</p>';
 
-            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbwQvwnf5iCnUSBF7q3FK6TWHyDG11J5qrJnKMAU9gfYsV3pd_MWD7LTWpX_wK-8unU3fQ/exec'; 
+            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbxQmh9jCzKKQS4HNXM7EO9YyJGxUq1KzPASAWk08xe-JkMUJCrLYI5IR8ecJ7nQrd6RLg/exec'; 
 
             if (!gasWebAppUrl.startsWith('https://script.google.com/macros/s/') || !gasWebAppUrl.endsWith('/exec')) {
                 eventCalendarDiv.innerHTML = '<p class="text-red-500 text-center text-xl font-medium">イベントの読み込み中に問題が発生しました。後でもう一度お試しください。</p>';
@@ -609,8 +666,8 @@
         function showEventDetails(event) {
             modalEventTitle.textContent = event['タイトル'] || 'タイトルなし';
             modalEventSubtitle.textContent = event['サブタイトル'] || 'サブタイトルなし';
-            modalEventDateTime.textContent = event['日時'] || '不明';
-            modalEventEndTime.textContent = event['終了日時'] || 'なし';
+            modalEventDateTime.textContent = event['日時'] ? new Date(event['日時']).toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '不明';
+            modalEventEndTime.textContent = event['終了日時'] ? new Date(event['終了日時']).toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'なし';
             modalEventVenue.textContent = event['会場'] || '不明';
             modalEventAddress.textContent = event['住所'] || '不明';
             modalEventArea.textContent = event['エリア'] || '不明';
@@ -652,4 +709,4 @@
     </script>
 </body>
 </html>
-# poie
+
