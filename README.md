@@ -530,7 +530,7 @@
             const eventCalendarDiv = document.getElementById('event-calendar');
             eventCalendarDiv.innerHTML = '<p class="text-gray-500 text-center text-2xl font-medium">イベントデータを読み込み中...</p>';
 
-            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbxQmh9jCzKKQS4HNXM7EO9YyJGxUq1KzPASAWk08xe-JkMUJCrLYI5IR8ecJ7nQrd6RLg/exec'; 
+            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbwQvwnf5iCnUSBF7q3FK6TWHyDG11J5qrJnKMAU9gfYsV3pd_MWD7LTWpX_wK-8unU3fQ/exec'; 
 
             if (!gasWebAppUrl.startsWith('https://script.google.com/macros/s/') || !gasWebAppUrl.endsWith('/exec')) {
                 eventCalendarDiv.innerHTML = '<p class="text-red-500 text-center text-xl font-medium">イベントの読み込み中に問題が発生しました。後でもう一度お試しください。</p>';
@@ -709,4 +709,3 @@
     </script>
 </body>
 </html>
-
